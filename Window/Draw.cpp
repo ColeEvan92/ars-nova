@@ -135,20 +135,20 @@ namespace bleak
 			size_t start = 0;
 			do
 			{
-				size_t end = std::min(str.size(), str.find_first_of("\n\r\c"));
+				size_t end = std::min(str.size(), str.find_first_of("\n\r"));
 				bstring line = str.substr(start, end - start);
 				windows::SIZE sz{};
 				windows::GetTextExtentPoint32(_dc, line.c_str(), line.size(), &sz);
 				windows::RECT bounds{ pos.x_value, pos.y_value, pos.x_value + sz.cx, pos.y_value + sz.cy };
 				windows::DrawText(_dc, line.c_str(), line.size(), &bounds, windows::DT_NOCLIP);
-				start = str.find_first_not_of("\n\r\c", end);
+				start = str.find_first_not_of("\n\r", end);
 				pos.y_value += sz.cy;
 			} while (start < str.size());
 		}
 		void Draw::text(const Rectangle& bounds, const bstring& str)
 		{
 			windows::RECT r = bounds;
-			windows::DrawText(_dc, str.c_str(), str.size(), &bounds, 0);
+			windows::DrawText(_dc, str.c_str(), str.size(), &r, 0);
 		}
 		void Draw::commit()
 		{
