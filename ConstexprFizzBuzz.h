@@ -1,5 +1,10 @@
 #pragma once
 
+//Obviously fizzbuzz isn't a challenge, but making a constexpr version was fun.
+//There might be a shorter way to do it using constexpr functions, but when I wrote this the vc++ compiler wasn't advanced enough.
+//The biggest challenge was circumventing the template instantiation depth limit.
+//I went into that problem blind and came up with this approach.
+
 namespace detail
 {
 	template <char...> struct Container {};
